@@ -36,7 +36,52 @@ func main() {
 
 	router := gin.Default()
 
-	// Define routes here
+	router.GET("/todos", GetTodos)
+	router.POST("/todos", CreateTodo)
+	router.PUT("/todos/:id", UpdateTodo)
+	router.DELETE("/todos/:id", DeleteTodo)
 
 	router.Run()
+}
+
+func GetTodos(c *gin.Context) {
+	var todos []Todo
+	db.Find(&todos)
+	c.JSON(200, todos)
+}
+
+func CreateTodo(c *gin.Context) {
+	var todo Todo
+	if err := c.ShouldBindJSON(&todo); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	db.Create(&todo)
+	c.JSON(201, todo)
+}
+
+func UpdateTodo(c *gin.Context) {
+	id := c.Param("id")
+	var todo Todo
+	if err := db.First(&todo, id).Error; err != nil {
+		c.JSON(404, gin.H{"error": "Todo not found"})
+		return
+	}
+	if err := c.ShouldBindJSON(&todo); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	db.Save(&todo)
+	c.JSON(200, todo)
+}
+
+func DeleteTodo(c *gin.Context) {
+	id := c.Param("id")
+	var todo Todo
+	if err := db.First(&todo, id).Error; err != nil {
+		c.JSON(404, gin.H{"error": "Todo not found"})
+		return
+	}
+	db.Delete(&todo)
+	c.JSON(200, gin.H{"message": "Todo deleted"})
 }
