@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
@@ -35,6 +36,9 @@ func main() {
 	db.AutoMigrate(&Todo{})
 
 	router := gin.Default()
+
+	// Configure CORS
+	router.Use(cors.Default())
 
 	router.GET("/todos", GetTodos)
 	router.POST("/todos", CreateTodo)
