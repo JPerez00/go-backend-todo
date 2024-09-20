@@ -4,12 +4,14 @@
 
 Welcome to my journey of learning Go (Golang) by building a simple Todo app backend. This was my first time diving into Go, I wanted to create something practical to solidify my understanding of the language.
 
+In this Repo, we're sticking to the backend, focusing on Go and getting everything deployed on Fly.io. I'll post a separate blog post and repo about the frontend later.
+
 ## Project Overview
--    Language: Go (Golang)
--    Framework: Gin
--    ORM: GORM
--    Database: PostgreSQL
--    Purpose: Learning Go by building a RESTful API backend
+- Language: Go (Golang)
+- Framework: Gin
+- ORM: GORM
+- Database: PostgreSQL
+- Purpose: Learning Go by building a RESTful API backend
 
 ## Features
 
@@ -48,3 +50,7 @@ Welcome to my journey of learning Go (Golang) by building a simple Todo app back
 - go.mod & go.sum: Go module files for dependency management.
 - .env.example: An example environment file illustrating the required environment variables.
 - README.md: Project overview and documentation (you're reading it!).
+
+## Read The Blog
+
+See how this project was built and explore the steps on my [blog](https://www.jorge-perez.dev/blog/golang-app-backend).
